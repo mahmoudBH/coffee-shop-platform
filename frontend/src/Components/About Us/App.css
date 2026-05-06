@@ -1,0 +1,80 @@
+/* App.css */
+
+/* Style général pour la page */
+.map-container {
+    font-family: 'Roboto', sans-serif; /* Police moderne */
+    background: linear-gradient(135deg, #e2e2e2, #ffffff); /* Dégradé doux */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Titre */
+  .map-title {
+    font-size: 3rem; /* Augmentation de la taille du titre */
+    font-weight: 700;
+    color: #2c3e50; /* Couleur plus sombre pour un contraste plus fort */
+    margin-bottom: 1.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Ombre subtile pour le titre */
+  }
+  
+  /* Ajustements de la carte */
+  .leaflet-container {
+    border-radius: 20px; /* Bordures encore plus arrondies */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Ombre plus marquée */
+    overflow: hidden;
+    transition: transform 0.3s ease; /* Effet de transition pour un zoom élégant */
+  }
+  
+  .leaflet-container:hover {
+    transform: scale(1.05); /* Zoom léger au survol */
+  }
+  
+  /* Popup */
+  .leaflet-popup-content {
+    font-size: 16px;
+    font-weight: 500;
+    color: #34495e;
+    text-align: center;
+    padding: 15px 20px;
+    background: #ffffff; /* Fond blanc pour le popup */
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Ombre douce pour le popup */
+    max-width: 250px;
+  }
+  
+  .leaflet-popup-content strong {
+    font-size: 18px;
+    color: #e74c3c; /* Couleur rouge moderne pour l'entête */
+    text-transform: uppercase;
+  }
+  
+  /* Marqueur */
+  .leaflet-div-icon {
+    background-color: transparent;
+    border: none;
+  }
+  
+  /* Marqueur personnalisé (cercle rouge avec bordure fine) */
+  .leaflet-marker-icon {
+    background-color: #e74c3c;
+    border-radius: 50%;
+    border: 4px solid #ffffff;
+    width: 40px;
+    height: 40px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Ombre légère autour du marqueur */
+  }
+  
+  /* Animation du marqueur */
+  .leaflet-marker-icon:hover {
+    transform: scale(1.1); /* Légère animation de zoom au survol */
+    cursor: pointer;
+  }
+  

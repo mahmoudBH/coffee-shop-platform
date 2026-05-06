@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+/* index.css */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+body{
+  
+  overflow-x: hidden;
+}
+.hero-main{
+  background: linear-gradient(rgba(0, 0, 0, .8), rgba(0, 0, 0, .8)), url(./assests/img/bg-hero.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.hero-text{
+  font-family:  'Nunito', 'sans-serif' !important; 
+  line-height: 1.2;
+}
+.hero-img{
+  animation: rotation 50s infinite;
+}
+@keyframes rotation {
+  0%  {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.about-img-02{
+  margin-top: 25%;
+}
+.about-img-03{
+  margin-left: 25%;
+}
+.sec-heading {
+  font-family: 'Pacifico', cursive;
+}
+
+a:hover , a.active{
+  color : #FEA116;
+  font-weight: 500;
+ 
+}
+
