@@ -6,136 +6,136 @@
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
 
-Une solution complète "Fullstack" de gestion et de vitrine pour un café / restaurant. Ce projet est divisé en trois parties principales : une interface client élégante, un tableau de bord administrateur complet, et une API backend robuste.
+A complete "Full-Stack" management and showcase solution for a coffee shop or restaurant. This project is divided into three main parts: an elegant client interface, a comprehensive administrator dashboard, and a robust backend API.
 
 ## 🔗 Live Demo
-* **🌍 Site Client (Vitrine & Menu) :** [https://coffee-shop-platform-client.vercel.app](https://coffee-shop-platform-client.vercel.app) *(lien à remplacer par ton vrai lien Vercel)*
-* **🔒 Dashboard Admin :** [https://coffee-shop-platform-admin.vercel.app](https://coffee-shop-platform-admin.vercel.app) *(lien à remplacer)*
+* **🌍 Client Website (Showcase & Menu):** [https://coffee-shop-platform-sepia.vercel.app/](https://coffee-shop-platform-sepia.vercel.app/)
+* **🔒 Admin Dashboard:** [https://coffee-shop-platform-admin.vercel.app](https://coffee-shop-platform-admin.vercel.app) *(Link to be updated)*
 
 ---
 
 ## 🏗️ Architecture Diagram
 
-L'application suit une architecture moderne découplée (Client/Serveur) basée sur l'architecture MVC pour le backend :
+The application follows a modern decoupled architecture (Client/Server) based on the MVC pattern for the backend:
 
 ```mermaid
 graph TD;
-    %% Utilisateurs
-    Client([👤 Client])
-    Admin([👨‍💼 Administrateur])
+    %% Users
+    Client([👤 Customer])
+    Admin([👨‍💼 Administrator])
 
     %% Frontends
-    ClientApp[💻 Frontend React\nVitrine & Commandes]
-    AdminApp[💻 Frontend React\nTableau de Bord Admin]
+    ClientApp[💻 React Frontend\nShowcase & Orders]
+    AdminApp[💻 React Frontend\nAdmin Dashboard]
 
     %% Backend
     subgraph "Backend (Node.js / Express)"
-        API[🚀 API Centrale\nPort 4000]
-        Controllers[⚙️ Controllers MVC\nLogique métier]
+        API[🚀 Central API\nPort 4000]
+        Controllers[⚙️ MVC Controllers\nBusiness Logic]
         Middlewares[🛡️ Middlewares\nJWT & Multer]
     end
 
-    %% Base de données
-    DB[(🗄️ Base de Données MySQL)]
+    %% Database
+    DB[(🗄️ MySQL Database)]
 
-    %% Flux Client
-    Client -->|Navigue & Commande| ClientApp
-    ClientApp -->|Appels API HTTP/REST| API
+    %% Customer Flow
+    Client -->|Browse & Order| ClientApp
+    ClientApp -->|HTTP/REST API Calls| API
 
-    %% Flux Admin
-    Admin -->|Gère Stock & Menu| AdminApp
-    AdminApp -->|Requêtes sécurisées + Token| Middlewares
+    %% Admin Flow
+    Admin -->|Manage Stock & Menu| AdminApp
+    AdminApp -->|Secure Requests + Token| Middlewares
     
-    %% Résolution Backend
+    %% Backend Resolution
     Middlewares --> API
     API --> Controllers
-    Controllers -->|Requêtes SQL Promise| DB
+    Controllers -->|Promise SQL Queries| DB
 ```
 
 ---
 
-## 🌟 Fonctionnalités
+## 🌟 Features
 
-### 📱 Côté Client (Frontend)
-- **Menu Interactif :** Parcourez les cafés, thés, pâtisseries, crêpes et jus. *(Version statique sans backend disponible !)*
-- **Réservation de Tables :** Réservez votre place et indiquez vos requêtes spéciales.
-- **Gestion de Profil :** Inscription, connexion sécurisée et modification du profil.
-- **Historique de Commandes :** Ajoutez des produits au panier et passez des commandes depuis la table.
-- **Design Responsive :** Interface moderne, belle et adaptée aux mobiles.
+### 📱 Client Side (Frontend)
+- **Interactive Menu:** Browse coffees, teas, pastries, crepes, and juices. *(Static version without backend available!)*
+- **Table Reservation:** Book your seat and specify special requests.
+- **Profile Management:** Registration, secure login, and profile updates.
+- **Order History:** Add items to the cart and place orders from the table.
+- **Responsive Design:** Modern, beautiful, and mobile-friendly interface.
 
-### 💼 Côté Administrateur (Dashboard)
-- **Tableau de Bord :** Vue d'ensemble des statistiques (revenus, commandes, réservations, alertes de stock faible).
-- **Gestion du Menu & des Packs :** Ajoutez, modifiez ou supprimez des produits et créez des offres groupées.
-- **Gestion des Stocks :** Suivez en temps réel la consommation de vos ingrédients.
-- **Gestion des Commandes :** Validez les commandes et encaissez les paiements.
-- **Gestion des Réservations & Événements :** Acceptez/Refusez les réservations. Le système ferme automatiquement les événements si la capacité maximale est atteinte !
+### 💼 Administrator Side (Dashboard)
+- **Dashboard:** Overview of statistics (revenue, orders, reservations, low stock alerts).
+- **Menu & Pack Management:** Add, modify, or delete products and create bundled offers.
+- **Stock Management:** Track ingredient consumption in real-time.
+- **Order Management:** Validate orders and collect payments.
+- **Reservations & Events Management:** Accept/Reject reservations. The system automatically closes events if maximum capacity is reached!
 
-### ⚙️ Côté Backend (API)
-- **Architecture MVC :** Code propre, modulaire et évolutif (Modèle-Vue-Contrôleur).
-- **Sécurité :** Authentification par Token JWT et mots de passe hachés avec `bcrypt`.
-- **Uploads d'Images :** Gestion locale des images du menu et des événements via `multer`.
-- **Base de Données Relationnelle :** Schéma MySQL complet et optimisé.
+### ⚙️ Backend Side (API)
+- **MVC Architecture:** Clean, modular, and scalable code (Model-View-Controller).
+- **Security:** JWT Token authentication and hashed passwords with `bcrypt`.
+- **Image Uploads:** Local management of menu and event images using `multer`.
+- **Relational Database:** Comprehensive and optimized MySQL schema.
 
 ---
 
-## 📂 Structure du Projet
+## 📂 Project Structure
 
 ```text
 coffee-shop-platform/
-├── client/          # Application React (Vitrine Client)
-├── admin/           # Application React (Tableau de bord Administrateur)
-├── server/          # API Node.js & Express (Backend centralisé)
-├── coffee_shop.sql  # Fichier d'export de la base de données MySQL
-└── .github/         # Pipelines CI/CD (GitHub Actions)
+├── client/          # React Application (Client Showcase)
+├── admin/           # React Application (Administrator Dashboard)
+├── server/          # Node.js & Express API (Centralized Backend)
+├── coffee_shop.sql  # MySQL Database Export File
+└── .github/         # CI/CD Pipelines (GitHub Actions)
 ```
 
 ---
 
-## 🚀 Installation & Lancement Local
+## 🚀 Local Installation & Setup
 
-### Prérequis
+### Prerequisites
 - [Node.js](https://nodejs.org/) (v18+)
-- [XAMPP](https://www.apachefriends.org/) ou un serveur MySQL local.
+- [XAMPP](https://www.apachefriends.org/) or a local MySQL server.
 
-### 1. Base de données
-1. Lancez Apache et MySQL via XAMPP.
-2. Allez sur `http://localhost/phpmyadmin`.
-3. Créez une nouvelle base de données nommée `coffee_shop`.
-4. Importez le fichier `coffee_shop.sql` fourni à la racine du projet.
+### 1. Database Setup
+1. Start Apache and MySQL via XAMPP.
+2. Go to `http://localhost/phpmyadmin`.
+3. Create a new database named `coffee_shop`.
+4. Import the provided `coffee_shop.sql` file located in the project root.
 
-### 2. Démarrer le Backend (API)
-Ouvrez un terminal dans le dossier `server/` :
+### 2. Start the Backend (API)
+Open a terminal in the `server/` folder:
 ```bash
 cd server
 npm install
-# Créez un fichier .env (voir la section Configuration)
+# Create a .env file (see Configuration section)
 npm run dev
 ```
-*L'API tournera sur `http://localhost:4000`*
+*The API will run on `http://localhost:4000`*
 
-### 3. Démarrer le Client
-Ouvrez un second terminal dans le dossier `client/` :
+### 3. Start the Client
+Open a second terminal in the `client/` folder:
 ```bash
 cd client
 npm install
 npm start
 ```
-*Le site client tournera sur `http://localhost:3000`*
+*The client site will run on `http://localhost:3000`*
 
-### 4. Démarrer l'Admin
-Ouvrez un troisième terminal dans le dossier `admin/` :
+### 4. Start the Admin Dashboard
+Open a third terminal in the `admin/` folder:
 ```bash
 cd admin
 npm install
 npm start
 ```
-*Le tableau de bord tournera sur `http://localhost:3001`*
-*(Identifiants admin par défaut : `admin@admin.com` / `admin`)*
+*The dashboard will run on `http://localhost:3001`*
+*(Default admin credentials: `admin@admin.com` / `admin`)*
 
 ---
 
 ## 🔐 Configuration (`.env`)
-Dans le dossier `server/`, créez un fichier `.env` avec le contenu suivant :
+In the `server/` folder, create a `.env` file with the following content:
 ```env
 PORT=4000
 DB_HOST=localhost
@@ -143,32 +143,35 @@ DB_USER=root
 DB_PASSWORD=
 DB_NAME=coffee_shop
 
-JWT_SECRET=mon_super_secret_jwt_a_changer
-SESSION_SECRET=mon_super_secret_session_a_changer
+JWT_SECRET=my_super_secret_jwt_to_change
+SESSION_SECRET=my_super_secret_session_to_change
 ```
 
 ---
 
-## 🌐 Déploiement en Production
+## 🌐 Production Deployment
 
-Ce projet est conçu pour être facilement déployé sur le cloud :
+This project is designed to be easily deployed to the cloud:
 
-1. **Frontends (`client` et `admin`) :** Peuvent être déployés gratuitement sur [Vercel](https://vercel.com/) ou Netlify. L'intégration continue (CI) est déjà configurée. *(Note: Le site client contient un mode "statique" qui permet d'afficher le menu complet sans avoir besoin du backend).*
-2. **Base de données :** Peut être hébergée sur des services comme Clever-Cloud, Aiven, ou PlanetScale.
-3. **Backend (`server`) :** Idéalement déployé sur Render.com ou Railway.app. N'oubliez pas d'y configurer vos variables d'environnement !
+1. **Frontends (`client` and `admin`):** Can be deployed for free on [Vercel](https://vercel.com/) or Netlify. Continuous Integration (CI) is already configured. *(Note: The client site contains a "static" mode allowing the full menu display without needing the backend).*
+2. **Database:** Can be hosted on services like Clever-Cloud, Aiven, or PlanetScale.
+3. **Backend (`server`):** Ideally deployed on Render.com or Railway.app. Don't forget to configure your environment variables there!
 
 ---
 
-## 🛠️ Technologies Utilisées
-- **Frontend :** React.js, TailwindCSS, Axios, React-Router
-- **Backend :** Node.js, Express.js
+## 🛠️ Technologies Used
+- **Frontend:** React.js, TailwindCSS, Axios, React-Router
+- **Backend:** Node.js, Express.js
+- **Database:** MySQL (`mysql2` package with promises)
+- **Tools:** JWT (Authentication), Bcrypt (Security), Multer (File Upload), GitHub Actions (CI/CD)
+
 ---
 
-## 👨‍💻 Auteur
+## 👨‍💻 Author
 
 **Mahmoud BH**
-- GitHub : [@mahmoudBH](https://github.com/mahmoudBH)
-- N'hésitez pas à me contacter si vous avez des questions sur ce projet ou si vous souhaitez collaborer !
+- GitHub: [@mahmoudBH](https://github.com/mahmoudBH)
+- Feel free to contact me if you have any questions about this project or if you'd like to collaborate!
 
 ---
-*Si vous aimez ce projet, n'hésitez pas à laisser une ⭐ sur le repo !*
+*If you like this project, please consider leaving a ⭐ on the repo!*
