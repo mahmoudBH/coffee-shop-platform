@@ -1,0 +1,54 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-client:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'
+    - name: Install Client Dependencies
+      run: npm install
+      working-directory: ./client
+    - name: Build Client
+      run: npm run build --if-present
+      working-directory: ./client
+
+  build-admin:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'
+    - name: Install Admin Dependencies
+      run: npm install
+      working-directory: ./admin
+    - name: Build Admin
+      run: npm run build --if-present
+      working-directory: ./admin
+
+  test-server:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'
+    - name: Install Server Dependencies
+      run: npm install
+      working-directory: ./server
+    # Ici, tu pourras ajouter un script "npm test" plus tard
+    # - name: Run Server Tests
+    #   run: npm test
+    #   working-directory: ./server
