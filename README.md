@@ -9,8 +9,7 @@
 A complete "Full-Stack" management and showcase solution for a coffee shop or restaurant. This project is divided into three main parts: an elegant client interface, a comprehensive administrator dashboard, and a robust backend API.
 
 ## 🔗 Live Demo
-* **🌍 Client Website (Showcase & Menu):** [https://coffee-shop-platform-sepia.vercel.app/](https://coffee-shop-platform-sepia.vercel.app/)
-* **🔒 Admin Dashboard:** [https://coffee-shop-platform-admin.vercel.app](https://coffee-shop-platform-admin.vercel.app) *(Link to be updated)*
+* **🌍 Site Client (Vitrine & Menu) :** [(https://coffee-shop-platform-client.vercel.app](https://coffee-shop-platform-sepia.vercel.app/)) 
 
 ---
 
