@@ -4,7 +4,6 @@ import { useTheme } from "../../context/ThemeProvider";
 
 const Pack = () => {
   const { isDarkMode } = useTheme();
-  const [menus, setMenus] = useState([]);
   const [groupedMenus, setGroupedMenus] = useState({});
   const [selectedMenus, setSelectedMenus] = useState([]);
   const [packName, setPackName] = useState("");
@@ -147,12 +146,12 @@ const Pack = () => {
 
   useEffect(() => {
     fetchMenus();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchMenus = async () => {
     try {
       const response = await axios.get("http://localhost:4000/api/menu");
-      setMenus(response.data);
       groupMenusByCategory(response.data);
     } catch (error) {
       console.error("Erreur lors de la récupération des menus:", error);
