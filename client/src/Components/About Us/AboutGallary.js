@@ -13,22 +13,22 @@ const AboutGallary = () => {
 
         <div className="aspect-w-1 aspect-h-5">
         <Zoom>
-          <img className="object-cover object-center w-full h-full" src={aboutimg01} alt="gallery-image"/>
+          <img className="object-cover object-center w-full h-full" src={aboutimg01} alt="gallery item"/>
           </Zoom>
         </div>
         <div className="aspect-w-1 aspect-h-1">
         <Zoom>
-          <img className="object-cover object-center about-img-02  w-3/4 h-3/4" src={aboutimg02} alt="gallery-image"/>
+          <img className="object-cover object-center about-img-02  w-3/4 h-3/4" src={aboutimg02} alt="gallery item"/>
           </Zoom>
         </div>
         <div className="aspect-w-1 aspect-h-1">
         <Zoom>
-          <img className="object-cover object-center about-img-03 w-3/4 h-3/4l" src={aboutimg03} alt="gallery-image"/>
+          <img className="object-cover object-center about-img-03 w-3/4 h-3/4l" src={aboutimg03} alt="gallery item"/>
           </Zoom>
         </div>
         <div className="aspect-w-1 aspect-h-1">
         <Zoom>
-          <img className="object-cover object-center w-full h-full" src={aboutimg04} alt="gallery-image"/>
+          <img className="object-cover object-center w-full h-full" src={aboutimg04} alt="gallery item"/>
           </Zoom>
         </div>
       </div>

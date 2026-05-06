@@ -3,7 +3,7 @@ import MyServices from "./MyServices";
 import {ServicesData} from "./ServicesData";
 
 const Services = () => {
-  const [serviceDetails, setserviceDetails] = useState(ServicesData);
+  const [serviceDetails] = useState(ServicesData);
 
   return (
     <>
