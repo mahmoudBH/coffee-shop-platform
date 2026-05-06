@@ -9,7 +9,7 @@
 Une solution complète "Fullstack" de gestion et de vitrine pour un café / restaurant. Ce projet est divisé en trois parties principales : une interface client élégante, un tableau de bord administrateur complet, et une API backend robuste.
 
 ## 🔗 Live Demo
-* **🌍 Site Client (Vitrine & Menu) :** [(https://coffee-shop-platform-client.vercel.app](https://coffee-shop-platform-sepia.vercel.app/)) *(lien à remplacer par 
+* **🌍 Site Client (Vitrine & Menu) :** [(https://coffee-shop-platform-client.vercel.app](https://coffee-shop-platform-sepia.vercel.app/)) 
 
 ---
 
