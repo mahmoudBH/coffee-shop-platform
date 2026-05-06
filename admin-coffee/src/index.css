@@ -1,0 +1,95 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Mode Clair par défaut */
+body {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* Mode Sombre */
+body.dark-mode {
+  background-color: #1e1e1e;
+  color: #f5f5f5;
+}
+
+/* Cartes - Mode Sombre */
+body.dark-mode .card {
+  background-color: rgb(68, 68, 68);  /* Fond sombre */
+  color: #fff;
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+}
+
+/* Cartes - Mode Clair */
+body .card {
+  background-color: #fff;
+  color: #333;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Graphiques - Mode Sombre */
+body.dark-mode .chartBox {
+  background-color: rgb(68, 68, 68);  /* Fond sombre */
+  color: #fff;
+}
+
+/* Graphiques - Mode Clair */
+body .chartBox {
+  background-color: #fff;
+  color: #333;
+}
+
+/* Titres - Mode Sombre */
+body.dark-mode h2, body.dark-mode h1 {
+  color: #fff;
+}
+
+/* Titres - Mode Clair */
+body h2, body h1 {
+  color: #333;
+}
+
+/* Icônes - Mode Sombre */
+body.dark-mode .icon {
+  color: #ffcc00; /* Couleur jaune pour ressortir */
+}
+
+/* Icônes - Mode Clair */
+body .icon {
+  color: #6d28d9; /* Couleur par défaut */
+}
+
+/* Bouton Mode Sombre/Clair */
+body button {
+  background-color: #6d28d9;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+body button:hover {
+  background-color: #4a1c90;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateX(45deg) rotateY(0deg);
+  }
+  100% {
+    transform: rotateX(45deg) rotateY(360deg);
+  }
+}
+
+.table3D {
+  animation: rotate 10s infinite linear;
+}
+
+
