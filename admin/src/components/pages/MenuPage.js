@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useTheme } from "../../context/ThemeProvider";
+import { FaEdit, FaTrash, FaPlus, FaTimes, FaImage, FaTag, FaMoneyBillWave, FaListUl } from 'react-icons/fa';
 
 const MenuPage = () => {
   const { isDarkMode } = useTheme();
@@ -17,7 +18,6 @@ const MenuPage = () => {
     ingredients: []
   });
 
-  // Récupérer les produits via l'API
   useEffect(() => {
     fetchMenu();
   }, []);
@@ -28,7 +28,6 @@ const MenuPage = () => {
       .catch(error => console.error('Error fetching menu:', error));
   };
 
-  // Générer la liste des catégories uniques
   const categories = ['All', ...new Set(menuItems.map(item => item.category))];
 
   const handleInputChange = (e) => {
@@ -75,308 +74,174 @@ const MenuPage = () => {
   };
 
   const deleteItem = (id) => {
-    axios.delete(`http://localhost:4000/api/menu/${id}`)
-      .then(fetchMenu)
-      .catch(error => console.error('Error deleting item:', error));
+    if (window.confirm("Êtes-vous sûr de vouloir supprimer cet article ?")) {
+      axios.delete(`http://localhost:4000/api/menu/${id}`)
+        .then(fetchMenu)
+        .catch(error => console.error('Error deleting item:', error));
+    }
   };
 
   const editItem = (item) => {
     setEditingItem(item);
     setFormData({
       ...item,
-      ingredients: JSON.parse(item.ingredients)
+      ingredients: item.ingredients ? JSON.parse(item.ingredients) : []
     });
     setShowForm(true);
   };
-
-  
-
-  // Déplacer les styles dans une fonction qui utilise isDarkMode
-  const getStyles = (isDark) => ({
-    container: {
-      padding: '20px',
-      fontFamily: 'Arial, sans-serif',
-      maxWidth: '1200px',
-      margin: '-80px auto',
-      backgroundColor: isDark ? '#1a1a1a' : '#fff',
-      color: isDark ? '#e0e0e0' : '#333',
-      minHeight: '100vh'
-    },
-    title: {
-      textAlign: 'center',
-      marginBottom: '20px',
-      color: isDark ? '#fff' : '#2c3e50'
-    },
-    controls: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      margin: '20px 0',
-      gap: '10px'
-    },
-    addButton: {
-      padding: '10px 20px',
-      backgroundColor: isDark ? '#388e3c' : '#4CAF50',
-      color: 'white',
-      border: 'none',
-      borderRadius: '4px',
-      cursor: 'pointer',
-      transition: 'all 0.3s ease',
-      ':hover': {
-        transform: 'scale(1.05)',
-        boxShadow: isDark ? '0 2px 8px rgba(0,0,0,0.3)' : '0 2px 8px rgba(0,0,0,0.1)'
-      }
-    },
-    modal: {
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: isDark ? 'rgba(0,0,0,0.8)' : 'rgba(0,0,0,0.5)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    },
-    modalContent: {
-      backgroundColor: isDark ? '#2d2d2d' : 'white',
-      padding: '20px',
-      borderRadius: '8px',
-      width: '80%',
-      maxWidth: '500px',
-      color: isDark ? '#e0e0e0' : '#333'
-    },
-    ingredientRow: {
-      display: 'flex',
-      gap: '10px',
-      margin: '10px 0',
-      alignItems: 'center'
-    },
-    ingredientInput: {
-      padding: '8px',
-      width: '100%',
-      border: `1px solid ${isDark ? '#444' : '#ccc'}`,
-      borderRadius: '5px',
-      backgroundColor: isDark ? '#404040' : '#fff',
-      color: isDark ? '#fff' : '#333'
-    },
-    removeIngredientButton: {
-      background: '#DC3545',
-      border: 'none',
-      color: 'white',
-      padding: '8px',
-      cursor: 'pointer',
-      borderRadius: '5px'
-    },
-    addIngredientButton: {
-      background: isDark ? '#8d6e63' : '#6D4C41',
-      border: 'none',
-      color: 'white',
-      padding: '8px 12px',
-      cursor: 'pointer',
-      borderRadius: '5px',
-      marginTop: '10px'
-    },
-    menuGrid: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-      gap: '20px',
-    },
-    menuItem: {
-      background: isDark ? '#2d2d2d' : '#f4f4f4',
-      padding: '15px',
-      borderRadius: '8px',
-      textAlign: 'center',
-      boxShadow: isDark 
-        ? '0px 2px 8px rgba(255,255,255,0.1)' 
-        : '0px 2px 8px rgba(0,0,0,0.1)',
-      border: isDark ? '1px solid #404040' : 'none'
-    },
-    image: {
-      width: '100%',
-      height: 'auto',
-      borderRadius: '8px',
-      marginBottom: '10px',
-    },
-    itemTitle: {
-      margin: '10px 0 5px 0',
-      color: isDark ? '#fff' : '#2c3e50'
-    },
-    description: {
-      fontSize: '14px',
-      color: isDark ? '#b0b0b0' : '#555',
-    },
-    price: {
-      fontWeight: 'bold',
-      marginTop: '10px',
-      color: isDark ? '#81c784' : '#2e7d32'
-    },
-    itemControls: {
-      marginTop: '10px',
-      display: 'flex',
-      gap: '10px',
-      justifyContent: 'center'
-    },
-    input: {
-      padding: '10px',
-      margin: '8px 0',
-      width: '100%',
-      borderRadius: '5px',
-      border: `1px solid ${isDark ? '#444' : '#ccc'}`,
-      backgroundColor: isDark ? '#404040' : '#fff',
-      color: isDark ? '#fff' : '#333'
-    },
-    textarea: {
-      padding: '10px',
-      margin: '8px 0',
-      width: '100%',
-      borderRadius: '5px',
-      border: `1px solid ${isDark ? '#444' : '#ccc'}`,
-      backgroundColor: isDark ? '#404040' : '#fff',
-      color: isDark ? '#fff' : '#333',
-      minHeight: '80px'
-    },
-    select: {
-      padding: '8px',
-      fontSize: '16px',
-      borderRadius: '5px',
-      border: `1px solid ${isDark ? '#444' : '#ccc'}`,
-      backgroundColor: isDark ? '#404040' : '#fff',
-      color: isDark ? '#fff' : '#333'
-    },
-  });
 
   const styles = getStyles(isDarkMode);
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.title}>Menu Management</h1>
-      <div style={styles.controls}>
-        <select
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-          style={styles.select}
-        >
-          {categories.map((cat, idx) => (
-            <option key={idx} value={cat}>{cat}</option>
-          ))}
-        </select>
+      <div style={styles.headerSection}>
+        <div>
+          <h1 style={styles.header}>🍽️ Gestion du Menu</h1>
+          <p style={styles.subtitle}>Gérez votre catalogue de produits, prix et ingrédients.</p>
+        </div>
         <button 
           style={styles.addButton}
           onClick={() => {
             setShowForm(true);
             setEditingItem(null);
             setFormData({
-              title: '',
-              price: '',
-              desc: '',
-              img: '',
-              category: '',
-              ingredients: []
+              title: '', price: '', desc: '', img: '', category: '', ingredients: []
             });
           }}
         >
-          Add New Item
+          <FaPlus style={{marginRight: '8px'}} /> Ajouter un Produit
         </button>
       </div>
 
+      <div style={styles.filterContainer}>
+        {categories.map((cat, idx) => (
+          <button
+            key={idx}
+            style={{
+              ...styles.filterButton,
+              ...(selectedCategory === cat ? styles.activeFilter : {})
+            }}
+            onClick={() => setSelectedCategory(cat)}
+          >
+            {cat === 'All' ? 'Tous les produits' : cat}
+          </button>
+        ))}
+      </div>
+
       {showForm && (
-        <div style={styles.modal}>
+        <div style={styles.modalOverlay}>
           <div style={styles.modalContent}>
-            <h2>{editingItem ? 'Edit Item' : 'New Item'}</h2>
-            <form onSubmit={handleSubmit}>
-              <input
-                name="title"
-                placeholder="Title"
-                value={formData.title}
-                onChange={handleInputChange}
-                required
-                style={styles.input}
-              />
-              <input
-                name="price"
-                type="number"
-                placeholder="Price"
-                value={formData.price}
-                onChange={handleInputChange}
-                required
-                style={styles.input}
-              />
-              <textarea
-                name="desc"
-                placeholder="Description"
-                value={formData.desc}
-                onChange={handleInputChange}
-                style={styles.textarea}
-                required
-              />
-              <input
-                name="img"
-                placeholder="Image URL"
-                value={formData.img}
-                onChange={handleInputChange}
-                style={styles.input}
-              />
-              <select
-                name="category"
-                value={formData.category}
-                onChange={handleInputChange}
-                required
-                style={styles.input}
-              >
-                <option value="">Select Category</option>
-                {categories.filter(c => c !== 'All').map((cat, idx) => (
-                  <option key={idx} value={cat}>{cat}</option>
-                ))}
-              </select>
+            <div style={styles.modalHeader}>
+              <h2 style={{margin: 0}}>{editingItem ? 'Modifier le Produit' : 'Nouveau Produit'}</h2>
+              <button style={styles.closeButton} onClick={() => setShowForm(false)}><FaTimes size={20} /></button>
+            </div>
+            
+            <form onSubmit={handleSubmit} style={styles.form}>
+              <div style={styles.formGrid}>
+                <div style={styles.inputGroup}>
+                  <label style={styles.label}><FaTag /> Nom du produit</label>
+                  <input
+                    name="title"
+                    value={formData.title}
+                    onChange={handleInputChange}
+                    required
+                    style={styles.input}
+                    placeholder="Ex: Espresso Double"
+                  />
+                </div>
+                
+                <div style={styles.inputGroup}>
+                  <label style={styles.label}><FaMoneyBillWave /> Prix (DA)</label>
+                  <input
+                    name="price"
+                    type="number"
+                    value={formData.price}
+                    onChange={handleInputChange}
+                    required
+                    style={styles.input}
+                    placeholder="Ex: 350"
+                  />
+                </div>
+
+                <div style={styles.inputGroup}>
+                  <label style={styles.label}><FaListUl /> Catégorie</label>
+                  <input
+                    name="category"
+                    value={formData.category}
+                    onChange={handleInputChange}
+                    required
+                    style={styles.input}
+                    placeholder="Ex: Coffee, Tea, Dessert..."
+                    list="category-options"
+                  />
+                  <datalist id="category-options">
+                    {categories.filter(c => c !== 'All').map((cat, idx) => <option key={idx} value={cat} />)}
+                  </datalist>
+                </div>
+
+                <div style={styles.inputGroup}>
+                  <label style={styles.label}><FaImage /> URL de l'image</label>
+                  <input
+                    name="img"
+                    value={formData.img}
+                    onChange={handleInputChange}
+                    style={styles.input}
+                    placeholder="/assets/menu/image.png"
+                  />
+                </div>
+              </div>
+
+              <div style={styles.inputGroup}>
+                <label style={styles.label}>Description</label>
+                <textarea
+                  name="desc"
+                  value={formData.desc}
+                  onChange={handleInputChange}
+                  style={styles.textarea}
+                  required
+                  placeholder="Description appétissante du produit..."
+                />
+              </div>
 
               <div style={styles.ingredientsSection}>
-                <h3>Ingredients:</h3>
+                <h3 style={{fontSize: '1.1rem', marginBottom: '15px'}}>Ingrédients (Pour le Stock)</h3>
                 {formData.ingredients.map((ing, index) => (
                   <div key={index} style={styles.ingredientRow}>
                     <input
-                      placeholder="Name"
+                      placeholder="Nom (ex: Café en grain)"
                       value={ing.name}
                       onChange={(e) => handleIngredientChange(index, 'name', e.target.value)}
-                      style={styles.ingredientInput}
+                      style={{...styles.input, flex: 2, margin: 0}}
                     />
                     <input
                       type="number"
-                      placeholder="Quantity"
+                      placeholder="Qté"
                       value={ing.quantity}
                       onChange={(e) => handleIngredientChange(index, 'quantity', e.target.value)}
-                      style={styles.ingredientInput}
+                      style={{...styles.input, flex: 1, margin: 0}}
                     />
                     <select
                       value={ing.unit}
                       onChange={(e) => handleIngredientChange(index, 'unit', e.target.value)}
-                      style={styles.ingredientInput}
+                      style={{...styles.input, flex: 1, margin: 0}}
                     >
-                      <option value="g">g</option>
-                      <option value="ml">ml</option>
-                      <option value="pcs">pcs</option>
+                      <option value="g">Grammes (g)</option>
+                      <option value="ml">Millilitres (ml)</option>
+                      <option value="pcs">Pièces (pcs)</option>
                     </select>
-                    <button 
-                      type="button"
-                      onClick={() => removeIngredient(index)}
-                      style={styles.removeIngredientButton}
-                    >
-                      ×
+                    <button type="button" onClick={() => removeIngredient(index)} style={styles.removeIngredientButton}>
+                      <FaTimes />
                     </button>
                   </div>
                 ))}
                 <button type="button" onClick={addIngredient} style={styles.addIngredientButton}>
-                  Add Ingredient
+                  <FaPlus size={12} style={{marginRight: '5px'}}/> Ajouter un ingrédient
                 </button>
               </div>
 
               <div style={styles.formButtons}>
-                <button type="submit" style={styles.saveButton}>Save</button>
-                <button type="button" onClick={() => {
-                  setShowForm(false);
-                  setEditingItem(null);
-                }} style={styles.cancelButton}>
-                  Cancel
-                </button>
+                <button type="button" onClick={() => setShowForm(false)} style={styles.cancelButton}>Annuler</button>
+                <button type="submit" style={styles.saveButton}>Sauvegarder</button>
               </div>
             </form>
           </div>
@@ -388,13 +253,20 @@ const MenuPage = () => {
           .filter(item => selectedCategory === 'All' || item.category === selectedCategory)
           .map(item => (
             <div key={item.id} style={styles.menuItem}>
-              <img src={item.img} alt={item.title} style={styles.image} />
-              <h3 style={styles.itemTitle}>{item.title}</h3>
-              <p style={styles.description}>{item.desc}</p>
-              <p style={styles.price}>Price: {item.price} DA</p>
-              <div style={styles.itemControls}>
-                <button onClick={() => editItem(item)} style={styles.editButton}>Edit</button>
-                <button onClick={() => deleteItem(item.id)} style={styles.deleteButton}>Delete</button>
+              <div style={styles.imageWrapper}>
+                <img src={item.img || "https://via.placeholder.com/300x200?text=No+Image"} alt={item.title} style={styles.image} />
+                <span style={styles.categoryBadge}>{item.category}</span>
+              </div>
+              <div style={styles.cardContent}>
+                <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start'}}>
+                  <h3 style={styles.itemTitle}>{item.title}</h3>
+                  <span style={styles.price}>{item.price} DA</span>
+                </div>
+                <p style={styles.description}>{item.desc}</p>
+                <div style={styles.itemControls}>
+                  <button onClick={() => editItem(item)} style={styles.editButton}><FaEdit /> Modifier</button>
+                  <button onClick={() => deleteItem(item.id)} style={styles.deleteButton}><FaTrash /> Supprimer</button>
+                </div>
               </div>
             </div>
           ))}
@@ -402,5 +274,320 @@ const MenuPage = () => {
     </div>
   );
 };
+
+const getStyles = (isDark) => ({
+  container: {
+    padding: '30px',
+    maxWidth: '1400px',
+    margin: '-80px auto',
+    fontFamily: "'Inter', sans-serif",
+    backgroundColor: isDark ? "#121212" : "#f8f9fa",
+    color: isDark ? "#f3f4f6" : "#1f2937",
+    minHeight: '100vh',
+    transition: "all 0.3s ease",
+  },
+  headerSection: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '30px',
+    flexWrap: 'wrap',
+    gap: '20px',
+  },
+  header: {
+    fontSize: '2.5rem',
+    fontWeight: '800',
+    color: isDark ? "#facc15" : "#1f2937",
+    margin: "0 0 10px 0",
+    letterSpacing: "-1px",
+  },
+  subtitle: {
+    fontSize: "1.1rem",
+    color: isDark ? "#9ca3af" : "#6b7280",
+    margin: 0,
+  },
+  addButton: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: '12px 24px',
+    backgroundColor: '#10b981',
+    color: 'white',
+    border: 'none',
+    borderRadius: '12px',
+    cursor: 'pointer',
+    fontWeight: '700',
+    fontSize: '1rem',
+    transition: 'all 0.3s ease',
+    boxShadow: '0 4px 14px rgba(16, 185, 129, 0.3)',
+  },
+  filterContainer: {
+    display: 'flex',
+    gap: '10px',
+    marginBottom: '30px',
+    flexWrap: 'wrap',
+    padding: '6px',
+    backgroundColor: isDark ? '#1f2937' : '#e5e7eb',
+    borderRadius: '12px',
+    width: 'fit-content'
+  },
+  filterButton: {
+    padding: '10px 20px',
+    border: 'none',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease',
+    backgroundColor: 'transparent',
+    color: isDark ? '#d1d5db' : '#4b5563',
+    fontWeight: '600',
+  },
+  activeFilter: {
+    backgroundColor: isDark ? '#374151' : '#ffffff',
+    color: isDark ? '#facc15' : '#6d28d9',
+    boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+  },
+  menuGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+    gap: '24px',
+  },
+  menuItem: {
+    background: isDark ? '#1f2937' : '#ffffff',
+    borderRadius: '16px',
+    overflow: 'hidden',
+    boxShadow: isDark ? "0 4px 6px -1px rgba(0,0,0,0.5)" : "0 4px 6px -1px rgba(0,0,0,0.05)",
+    border: `1px solid ${isDark ? '#374151' : '#f3f4f6'}`,
+    display: 'flex',
+    flexDirection: 'column',
+    transition: 'transform 0.3s ease',
+  },
+  imageWrapper: {
+    position: 'relative',
+    height: '200px',
+    width: '100%',
+    overflow: 'hidden'
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+  },
+  categoryBadge: {
+    position: 'absolute',
+    top: '12px',
+    right: '12px',
+    backgroundColor: 'rgba(0,0,0,0.7)',
+    color: 'white',
+    padding: '4px 12px',
+    borderRadius: '20px',
+    fontSize: '0.8rem',
+    fontWeight: '600',
+    backdropFilter: 'blur(4px)'
+  },
+  cardContent: {
+    padding: '20px',
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1
+  },
+  itemTitle: {
+    margin: '0 0 8px 0',
+    fontSize: '1.25rem',
+    fontWeight: '700',
+    color: isDark ? '#f3f4f6' : '#111827'
+  },
+  price: {
+    fontWeight: '800',
+    color: isDark ? '#facc15' : '#6d28d9',
+    fontSize: '1.2rem'
+  },
+  description: {
+    fontSize: '0.95rem',
+    color: isDark ? '#9ca3af' : '#6b7280',
+    lineHeight: '1.5',
+    marginBottom: '20px',
+    flex: 1
+  },
+  itemControls: {
+    display: 'flex',
+    gap: '10px',
+    marginTop: 'auto',
+    borderTop: `1px solid ${isDark ? '#374151' : '#f3f4f6'}`,
+    paddingTop: '16px'
+  },
+  editButton: {
+    flex: 1,
+    padding: '10px',
+    backgroundColor: isDark ? '#374151' : '#f3f4f6',
+    color: isDark ? '#e5e7eb' : '#374151',
+    border: 'none',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    fontWeight: '600',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: '8px',
+    transition: 'all 0.2s'
+  },
+  deleteButton: {
+    flex: 1,
+    padding: '10px',
+    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+    color: '#ef4444',
+    border: 'none',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    fontWeight: '600',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: '8px',
+    transition: 'all 0.2s'
+  },
+  modalOverlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0,0,0,0.7)',
+    backdropFilter: 'blur(5px)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 1000,
+    padding: '20px'
+  },
+  modalContent: {
+    backgroundColor: isDark ? '#1f2937' : '#ffffff',
+    borderRadius: '16px',
+    width: '100%',
+    maxWidth: '800px',
+    maxHeight: '90vh',
+    overflowY: 'auto',
+    boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)',
+    border: `1px solid ${isDark ? '#374151' : '#e5e7eb'}`
+  },
+  modalHeader: {
+    padding: '24px',
+    borderBottom: `1px solid ${isDark ? '#374151' : '#f3f4f6'}`,
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  closeButton: {
+    background: 'none',
+    border: 'none',
+    color: isDark ? '#9ca3af' : '#6b7280',
+    cursor: 'pointer'
+  },
+  form: {
+    padding: '24px'
+  },
+  formGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gap: '20px',
+    marginBottom: '20px'
+  },
+  inputGroup: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px',
+    marginBottom: '20px'
+  },
+  label: {
+    fontWeight: '600',
+    fontSize: '0.9rem',
+    color: isDark ? '#d1d5db' : '#4b5563',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px'
+  },
+  input: {
+    padding: '12px 16px',
+    borderRadius: '8px',
+    border: `1px solid ${isDark ? '#4b5563' : '#d1d5db'}`,
+    backgroundColor: isDark ? '#111827' : '#f9fafb',
+    color: isDark ? '#f3f4f6' : '#111827',
+    fontSize: '1rem',
+    outline: 'none',
+  },
+  textarea: {
+    padding: '12px 16px',
+    borderRadius: '8px',
+    border: `1px solid ${isDark ? '#4b5563' : '#d1d5db'}`,
+    backgroundColor: isDark ? '#111827' : '#f9fafb',
+    color: isDark ? '#f3f4f6' : '#111827',
+    fontSize: '1rem',
+    minHeight: '100px',
+    resize: 'vertical',
+    outline: 'none',
+  },
+  ingredientsSection: {
+    backgroundColor: isDark ? '#111827' : '#f9fafb',
+    padding: '20px',
+    borderRadius: '12px',
+    border: `1px solid ${isDark ? '#374151' : '#e5e7eb'}`,
+    marginBottom: '24px'
+  },
+  ingredientRow: {
+    display: 'flex',
+    gap: '10px',
+    marginBottom: '10px',
+    alignItems: 'center'
+  },
+  removeIngredientButton: {
+    background: '#ef4444',
+    border: 'none',
+    color: 'white',
+    width: '40px',
+    height: '40px',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  addIngredientButton: {
+    background: isDark ? '#374151' : '#e5e7eb',
+    border: 'none',
+    color: isDark ? '#f3f4f6' : '#1f2937',
+    padding: '10px 16px',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    fontWeight: '600',
+    display: 'flex',
+    alignItems: 'center',
+    marginTop: '10px'
+  },
+  formButtons: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    gap: '16px',
+    marginTop: '30px',
+    paddingTop: '20px',
+    borderTop: `1px solid ${isDark ? '#374151' : '#f3f4f6'}`
+  },
+  cancelButton: {
+    padding: '12px 24px',
+    backgroundColor: 'transparent',
+    color: isDark ? '#d1d5db' : '#4b5563',
+    border: `1px solid ${isDark ? '#4b5563' : '#d1d5db'}`,
+    borderRadius: '8px',
+    cursor: 'pointer',
+    fontWeight: '600'
+  },
+  saveButton: {
+    padding: '12px 32px',
+    backgroundColor: '#6d28d9',
+    color: 'white',
+    border: 'none',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    fontWeight: '700',
+    boxShadow: '0 4px 14px rgba(109, 40, 217, 0.3)'
+  }
+});
 
 export default MenuPage;

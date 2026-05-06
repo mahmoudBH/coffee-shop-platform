@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useTheme } from "../../context/ThemeProvider";
+import { FaCalendarPlus, FaCalendarAlt, FaImage, FaAlignLeft, FaClock } from "react-icons/fa";
 
 const Event = () => {
   const [events, setEvents] = useState([]);
@@ -48,219 +49,298 @@ const Event = () => {
     }
   };
 
-  const getStyles = (isDark) => ({
-    container: {
-      padding: "2rem",
-      fontFamily: "'Playfair Display', serif",
-      maxWidth: "1200px",
-      margin: "-80px auto",
-      backgroundColor: isDark ? "" : "",
-      minHeight: "100vh",
-      transition: "all 0.5s ease",
-    },
-    title: {
-      textAlign: "center",
-      margin: "2rem 0",
-      fontSize: "40px",
-      color: isDark ? "#d4a972" : "#6f4e37",
-      textShadow: "2px 2px 4px rgba(0,0,0,0.2)",
-      position: "relative",
-      "&:after": {
-        content: '""',
-        position: "absolute",
-        bottom: "-15px",
-        left: "50%",
-        transform: "translateX(-50%)",
-        width: "120px",
-        height: "3px",
-        background: isDark ? "#d4a972" : "#6f4e37",
-        borderRadius: "2px"
-      }
-    },
-    form: {
-      display: "flex",
-      flexDirection: "column",
-      gap: "1.5rem",
-      marginBottom: "3rem",
-      padding: "2rem",
-      background: isDark ? "" : "",
-      borderRadius: "15px",
-      backdropFilter: "blur(10px)",
-      boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
-      border: `1px solid ${isDark ? "rgba(212, 169, 114, 0.2)" : "rgba(111, 78, 55, 0.2)"}`
-    },
-    input: {
-      padding: "1rem",
-      borderRadius: "8px",
-      border: `1px solid ${isDark ? "#d4a972" : "#6f4e37"}`,
-      fontSize: "1rem",
-      background: "transparent",
-      color: isDark ? "#fff" : "#4B2C20",
-      transition: "all 0.3s ease",
-      "&:focus": {
-        outline: "none",
-        boxShadow: `0 0 0 3px ${isDark ? "rgba(212, 169, 114, 0.3)" : "rgba(111, 78, 55, 0.3)"}`
-      }
-    },
-    textarea: {
-      padding: "1rem",
-      borderRadius: "8px",
-      border: `1px solid ${isDark ? "#d4a972" : "#6f4e37"}`,
-      fontSize: "1rem",
-      background: "transparent",
-      color: isDark ? "#fff" : "#4B2C20",
-      minHeight: "120px",
-      transition: "all 0.3s ease"
-    },
-    fileInput: {
-      padding: "1rem",
-      color: isDark ? "#fff" : "#4B2C20",
-      "&::file-selector-button": {
-        padding: "0.5rem 1rem",
-        background: isDark ? "#d4a972" : "#6f4e37",
-        border: "none",
-        borderRadius: "5px",
-        color: "white",
-        cursor: "pointer",
-        transition: "all 0.3s ease",
-        "&:hover": {
-          transform: "scale(1.05)"
-        }
-      }
-    },
-    button: {
-      padding: "1rem 2rem",
-      backgroundColor: isDark ? "#d4a972" : "#6f4e37",
-      color: "white",
-      border: "none",
-      borderRadius: "8px",
-      fontSize: "1.1rem",
-      cursor: "pointer",
-      transition: "all 0.3s ease",
-      "&:hover": {
-        transform: "translateY(-2px)",
-        boxShadow: "0 5px 15px rgba(0,0,0,0.2)"
-      }
-    },
-    eventsContainer: {
-      display: "grid",
-      gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-      gap: "2rem",
-      padding: "1rem"
-    },
-    card: {
-      background: isDark ? "rgba(40, 40, 40, 0.7)" : "rgba(255, 255, 255, 0.8)",
-      padding: "1.5rem",
-      borderRadius: "15px",
-      backdropFilter: "blur(10px)",
-      boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
-      border: `1px solid ${isDark ? "rgba(212, 169, 114, 0.2)" : "rgba(111, 78, 55, 0.2)"}`,
-      transition: "all 0.3s ease",
-      "&:hover": {
-        transform: "translateY(-5px)",
-        boxShadow: "0 12px 24px rgba(0,0,0,0.15)"
-      }
-    },
-    cardImage: {
-      width: "100%",
-      height: "200px",
-      objectFit: "cover",
-      borderRadius: "10px",
-      marginBottom: "1rem",
-      border: `2px solid ${isDark ? "#d4a972" : "#6f4e37"}`,
-      boxShadow: "0 4px 12px rgba(0,0,0,0.1)"
-    },
-    cardTitle: {
-      fontSize: "1.5rem",
-      marginBottom: "0.5rem",
-      color: isDark ? "#d4a972" : "#6f4e37",
-      fontFamily: "'Playfair Display', serif"
-    },
-    cardDate: {
-      fontSize: "0.9rem",
-      color: isDark ? "#c4b7a6" : "#8c7261",
-      marginBottom: "1rem",
-      display: "flex",
-      alignItems: "center",
-      gap: "0.5rem",
-      "&:before": {
-        content: '"⏳"',
-        fontSize: "1.2rem"
-      }
-    },
-    cardDescription: {
-      fontSize: "1rem",
-      color: isDark ? "#e0d7cc" : "#5a4a42",
-      lineHeight: "1.6"
-    }
-  });
-
   const styles = getStyles(isDarkMode);
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.title}>📅 Événements du Café</h1>
+      <div style={styles.headerSection}>
+        <div>
+          <h1 style={styles.header}>🎉 Événements du Café</h1>
+          <p style={styles.subtitle}>Gérez les événements spéciaux et les soirées à thème.</p>
+        </div>
+      </div>
 
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <input
-          type="text"
-          placeholder="Titre de l'événement"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          style={styles.input}
-          required
-        />
-        <input
-          type="datetime-local"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          style={styles.input}
-          required
-        />
-        <textarea
-          placeholder="Description détaillée..."
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          style={styles.textarea}
-          required
-        />
-        <input
-          type="file"
-          onChange={(e) => setPhoto(e.target.files[0])}
-          style={styles.fileInput}
-          accept="image/*"
-        />
-        <button type="submit" style={styles.button}>
-          Publier l'événement ☕
-        </button>
-      </form>
-
-      <div style={styles.eventsContainer}>
-        {events.map((event) => (
-          <div key={event.id} style={styles.card}>
-            {event.photo && (
-              <img
-                src={`http://localhost:4000/uploads/${event.photo}`}
-                alt={event.title}
-                style={styles.cardImage}
+      <div style={styles.layout}>
+        {/* Formulaire d'ajout */}
+        <div style={styles.formContainer}>
+          <h2 style={styles.formTitle}><FaCalendarPlus /> Nouvel Événement</h2>
+          <form onSubmit={handleSubmit} style={styles.form}>
+            <div style={styles.inputGroup}>
+              <label style={styles.label}><FaCalendarAlt /> Titre</label>
+              <input
+                type="text"
+                placeholder="Ex: Soirée Jazz & Café"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                style={styles.input}
+                required
               />
-            )}
-            <h2 style={styles.cardTitle}>{event.title}</h2>
-            <p style={styles.cardDate}>
-              {new Date(event.date).toLocaleString("fr-FR", {
-                day: "2-digit",
-                month: "long",
-                year: "numeric",
-                hour: "2-digit",
-                minute: "2-digit",
-              })}
-            </p>
-            <p style={styles.cardDescription}>{event.description}</p>
-          </div>
-        ))}
+            </div>
+            
+            <div style={styles.inputGroup}>
+              <label style={styles.label}><FaClock /> Date et Heure</label>
+              <input
+                type="datetime-local"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                style={styles.input}
+                required
+              />
+            </div>
+
+            <div style={styles.inputGroup}>
+              <label style={styles.label}><FaAlignLeft /> Description</label>
+              <textarea
+                placeholder="Détails de l'événement..."
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                style={styles.textarea}
+                required
+              />
+            </div>
+
+            <div style={styles.inputGroup}>
+              <label style={styles.label}><FaImage /> Affiche / Photo</label>
+              <input
+                type="file"
+                onChange={(e) => setPhoto(e.target.files[0])}
+                style={styles.fileInput}
+                accept="image/*"
+              />
+            </div>
+
+            <button type="submit" style={styles.submitButton}>
+              Publier l'événement
+            </button>
+          </form>
+        </div>
+
+        {/* Liste des événements */}
+        <div style={styles.eventsGrid}>
+          {events.map((event) => (
+            <div key={event.id} style={styles.card}>
+              <div style={styles.cardImageWrapper}>
+                {event.photo ? (
+                  <img
+                    src={`http://localhost:4000/uploads/${event.photo}`}
+                    alt={event.title}
+                    style={styles.cardImage}
+                  />
+                ) : (
+                  <div style={styles.noImagePlaceholder}>
+                    <FaImage size={40} opacity={0.3} />
+                  </div>
+                )}
+                <span style={{
+                  ...styles.statusBadge, 
+                  backgroundColor: event.statut === 'fermer' ? '#ef4444' : '#10b981'
+                }}>
+                  {event.statut === 'fermer' ? 'Complet' : 'Ouvert'}
+                </span>
+              </div>
+              <div style={styles.cardContent}>
+                <h3 style={styles.cardTitle}>{event.title}</h3>
+                <div style={styles.cardDate}>
+                  <FaClock style={{marginRight: '8px', color: isDarkMode ? '#facc15' : '#6d28d9'}} />
+                  {new Date(event.date).toLocaleString("fr-FR", {
+                    weekday: "long",
+                    day: "numeric",
+                    month: "long",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </div>
+                <p style={styles.cardDescription}>{event.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
 };
+
+const getStyles = (isDark) => ({
+  container: {
+    padding: '30px',
+    maxWidth: '1400px',
+    margin: '-80px auto',
+    fontFamily: "'Inter', sans-serif",
+    backgroundColor: isDark ? "#121212" : "#f8f9fa",
+    color: isDark ? "#f3f4f6" : "#1f2937",
+    minHeight: '100vh',
+    transition: "all 0.3s ease",
+  },
+  headerSection: {
+    marginBottom: '30px',
+  },
+  header: {
+    fontSize: '2.5rem',
+    fontWeight: '800',
+    color: isDark ? "#facc15" : "#1f2937",
+    margin: "0 0 10px 0",
+    letterSpacing: "-1px",
+  },
+  subtitle: {
+    fontSize: "1.1rem",
+    color: isDark ? "#9ca3af" : "#6b7280",
+    margin: 0,
+  },
+  layout: {
+    display: 'flex',
+    gap: '30px',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'flex-start'
+  },
+  formContainer: {
+    flex: '1 1 350px',
+    position: 'sticky',
+    top: '20px',
+    backgroundColor: isDark ? '#1f2937' : '#ffffff',
+    padding: '24px',
+    borderRadius: '16px',
+    boxShadow: isDark ? "0 4px 6px -1px rgba(0, 0, 0, 0.5)" : "0 4px 6px -1px rgba(0, 0, 0, 0.05)",
+    border: `1px solid ${isDark ? '#374151' : '#f3f4f6'}`,
+  },
+  formTitle: {
+    margin: '0 0 20px 0',
+    fontSize: '1.4rem',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px'
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px'
+  },
+  inputGroup: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px'
+  },
+  label: {
+    fontWeight: '600',
+    fontSize: '0.9rem',
+    color: isDark ? '#d1d5db' : '#4b5563',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px'
+  },
+  input: {
+    padding: '12px 16px',
+    borderRadius: '8px',
+    border: `1px solid ${isDark ? '#4b5563' : '#d1d5db'}`,
+    backgroundColor: isDark ? '#111827' : '#f9fafb',
+    color: isDark ? '#f3f4f6' : '#111827',
+    fontSize: '1rem',
+    outline: 'none',
+  },
+  textarea: {
+    padding: '12px 16px',
+    borderRadius: '8px',
+    border: `1px solid ${isDark ? '#4b5563' : '#d1d5db'}`,
+    backgroundColor: isDark ? '#111827' : '#f9fafb',
+    color: isDark ? '#f3f4f6' : '#111827',
+    fontSize: '1rem',
+    minHeight: '120px',
+    resize: 'vertical',
+    outline: 'none',
+  },
+  fileInput: {
+    padding: '10px',
+    backgroundColor: isDark ? '#111827' : '#f9fafb',
+    border: `1px dashed ${isDark ? '#4b5563' : '#d1d5db'}`,
+    borderRadius: '8px',
+    color: isDark ? '#d1d5db' : '#4b5563',
+    cursor: 'pointer'
+  },
+  submitButton: {
+    marginTop: '10px',
+    padding: '14px',
+    backgroundColor: '#6d28d9',
+    color: 'white',
+    border: 'none',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    fontWeight: '700',
+    fontSize: '1rem',
+    transition: 'all 0.2s',
+    boxShadow: '0 4px 14px rgba(109, 40, 217, 0.3)'
+  },
+  eventsGrid: {
+    flex: '2 1 600px',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+    gap: '24px',
+  },
+  card: {
+    background: isDark ? '#1f2937' : '#ffffff',
+    borderRadius: '16px',
+    overflow: 'hidden',
+    boxShadow: isDark ? "0 4px 6px -1px rgba(0,0,0,0.5)" : "0 4px 6px -1px rgba(0,0,0,0.05)",
+    border: `1px solid ${isDark ? '#374151' : '#f3f4f6'}`,
+    display: 'flex',
+    flexDirection: 'column',
+    transition: 'transform 0.3s ease',
+  },
+  cardImageWrapper: {
+    position: 'relative',
+    height: '200px',
+    width: '100%',
+    backgroundColor: isDark ? '#111827' : '#f3f4f6'
+  },
+  cardImage: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover'
+  },
+  noImagePlaceholder: {
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: isDark ? '#374151' : '#e5e7eb'
+  },
+  statusBadge: {
+    position: 'absolute',
+    top: '12px',
+    right: '12px',
+    color: 'white',
+    padding: '6px 12px',
+    borderRadius: '20px',
+    fontSize: '0.8rem',
+    fontWeight: '700',
+    boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
+  },
+  cardContent: {
+    padding: '20px',
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1
+  },
+  cardTitle: {
+    margin: '0 0 10px 0',
+    fontSize: '1.3rem',
+    fontWeight: '800',
+    color: isDark ? '#f3f4f6' : '#111827'
+  },
+  cardDate: {
+    fontSize: '0.9rem',
+    color: isDark ? '#9ca3af' : '#6b7280',
+    display: 'flex',
+    alignItems: 'center',
+    marginBottom: '15px',
+    fontWeight: '600'
+  },
+  cardDescription: {
+    fontSize: '0.95rem',
+    color: isDark ? '#d1d5db' : '#4b5563',
+    lineHeight: '1.6',
+    margin: 0
+  }
+});
 
 export default Event;
