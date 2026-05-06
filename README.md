@@ -10,7 +10,6 @@ A complete "Full-Stack" management and showcase solution for a coffee shop or re
 
 ## 🔗 Live Demo
 * **🌍 Client Website (Showcase & Menu):** [https://coffee-shop-platform-sepia.vercel.app/](https://coffee-shop-platform-sepia.vercel.app/)
-* **🔒 Admin Dashboard:** [https://coffee-shop-platform-admin.vercel.app](https://coffee-shop-platform-admin.vercel.app) *(Link to be updated)*
 
 ---
 
@@ -169,7 +168,7 @@ This project is designed to be easily deployed to the cloud:
 
 ## 👨‍💻 Author
 
-**Mahmoud BH**
+**Mahmoud Bousbih**
 - GitHub: [@mahmoudBH](https://github.com/mahmoudBH)
 - Feel free to contact me if you have any questions about this project or if you'd like to collaborate!
 
