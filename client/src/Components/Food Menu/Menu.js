@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import MyMenu from "./MyMenu";
 import Fade from "react-reveal/Fade";
 import { FaShoppingCart, FaTrashAlt } from "react-icons/fa";
+import { MenuData } from "./MenuData";
 
 const Menu = () => {
   const [menuItems, setMenuItems] = useState([]);
@@ -14,29 +15,9 @@ const Menu = () => {
   const tableNumber = searchParams.get("table") || "Unknown";
 
   useEffect(() => {
-    const fetchMenuData = async () => {
-      try {
-        const response = await fetch("http://localhost:4000/api/menu");
-        if (!response.ok) {
-          throw new Error("Erreur lors de la récupération des données");
-        }
-        const data = await response.json();
-    
-        // Mettre à jour l'URL des images pour correspondre à la nouvelle structure
-        const formattedData = data.map((item) => ({
-          ...item,
-          price: parseFloat(item.price),
-          img: `http://localhost:4000${item.img}`, // Utiliser l'URL correcte renvoyée par l'API
-        }));
-    
-        setMenuItems(formattedData);
-        setFilteredItems(formattedData);
-      } catch (error) {
-        console.error("Erreur :", error);
-      }
-    };
-  
-    fetchMenuData();
+    // Remplacer l'appel API par les données statiques
+    setMenuItems(MenuData);
+    setFilteredItems(MenuData);
   }, []);
   
   
@@ -68,36 +49,16 @@ const Menu = () => {
   const calculateTotal = () =>
     cart.reduce((total, item) => total + item.price, 0).toFixed(0);
 
-  // Passer la commande
+  // Passer la commande (désactivé pour la version 100% statique)
   const handleOrder = async () => {
     if (cart.length === 0) {
       alert("Votre panier est vide !");
       return;
     }
 
-    const orderData = {
-      tableNumber,
-      items: cart,
-      totalPrice: calculateTotal(),
-    };
-
-    try {
-      const response = await fetch("http://localhost:4000/api/orders", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(orderData),
-      });
-
-      if (response.ok) {
-        alert("Commande envoyée avec succès !");
-        setCart([]);
-        setShowCart(false);
-      } else {
-        alert("Erreur lors de l'envoi de la commande.");
-      }
-    } catch (error) {
-      console.error("Erreur serveur :", error);
-    }
+    alert("Ceci est une version statique du site. Le système de commande en ligne est désactivé.");
+    setCart([]);
+    setShowCart(false);
   };
 
   return (
