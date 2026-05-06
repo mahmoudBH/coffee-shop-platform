@@ -8,6 +8,50 @@
 
 Une solution complète "Fullstack" de gestion et de vitrine pour un café / restaurant. Ce projet est divisé en trois parties principales : une interface client élégante, un tableau de bord administrateur complet, et une API backend robuste.
 
+## 🔗 Live Demo
+* **🌍 Site Client (Vitrine & Menu) :** [https://coffee-shop-platform-client.vercel.app](https://coffee-shop-platform-client.vercel.app) *(lien à remplacer par ton vrai lien Vercel)*
+* **🔒 Dashboard Admin :** [https://coffee-shop-platform-admin.vercel.app](https://coffee-shop-platform-admin.vercel.app) *(lien à remplacer)*
+
+---
+
+## 🏗️ Architecture Diagram
+
+L'application suit une architecture moderne découplée (Client/Serveur) basée sur l'architecture MVC pour le backend :
+
+```mermaid
+graph TD;
+    %% Utilisateurs
+    Client([👤 Client])
+    Admin([👨‍💼 Administrateur])
+
+    %% Frontends
+    ClientApp[💻 Frontend React\nVitrine & Commandes]
+    AdminApp[💻 Frontend React\nTableau de Bord Admin]
+
+    %% Backend
+    subgraph "Backend (Node.js / Express)"
+        API[🚀 API Centrale\nPort 4000]
+        Controllers[⚙️ Controllers MVC\nLogique métier]
+        Middlewares[🛡️ Middlewares\nJWT & Multer]
+    end
+
+    %% Base de données
+    DB[(🗄️ Base de Données MySQL)]
+
+    %% Flux Client
+    Client -->|Navigue & Commande| ClientApp
+    ClientApp -->|Appels API HTTP/REST| API
+
+    %% Flux Admin
+    Admin -->|Gère Stock & Menu| AdminApp
+    AdminApp -->|Requêtes sécurisées + Token| Middlewares
+    
+    %% Résolution Backend
+    Middlewares --> API
+    API --> Controllers
+    Controllers -->|Requêtes SQL Promise| DB
+```
+
 ---
 
 ## 🌟 Fonctionnalités
@@ -118,5 +162,13 @@ Ce projet est conçu pour être facilement déployé sur le cloud :
 ## 🛠️ Technologies Utilisées
 - **Frontend :** React.js, TailwindCSS, Axios, React-Router
 - **Backend :** Node.js, Express.js
-- **Base de données :** MySQL (package `mysql2` avec promesses)
-- **Outils :** JWT (Authentification), Bcrypt (Sécurité), Multer (Upload de fichiers), GitHub Actions (CI/CD)
+---
+
+## 👨‍💻 Auteur
+
+**Mahmoud BH**
+- GitHub : [@mahmoudBH](https://github.com/mahmoudBH)
+- N'hésitez pas à me contacter si vous avez des questions sur ce projet ou si vous souhaitez collaborer !
+
+---
+*Si vous aimez ce projet, n'hésitez pas à laisser une ⭐ sur le repo !*
